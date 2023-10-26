@@ -2,7 +2,6 @@ package tn.esprit.spring.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -49,6 +48,12 @@ public class Skier implements Serializable {
 //Amine manag
 
 
+	public Skier(String lastName) {
+		this.lastName = lastName;
+	}
 
-
+	public Skier(String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
 }
