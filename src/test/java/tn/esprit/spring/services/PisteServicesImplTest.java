@@ -37,13 +37,13 @@ class PisteServicesImplTest {
         when(pisteRepository.findAll()).thenReturn(mockPistes);
 
         // Actual
-       // List<Piste> result = pisteServices.retrieveAllPistes();
+         List<Piste> result = pisteServices.retrieveAllPistes();
 
         // Verification
-      //  verify(pisteRepository, times(1)).findAll();
+          verify(pisteRepository, times(1)).findAll();
 
         // Assert
-      //  Assertions.assertEquals(2, result.size());
+          Assertions.assertEquals(2, result.size());
     }
 
 //    @DisplayName("Add piste - success scenario")
