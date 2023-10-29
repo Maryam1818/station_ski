@@ -46,53 +46,53 @@ class PisteServicesImplTest {
           Assertions.assertEquals(2, result.size());
     }
 
-//    @DisplayName("Add piste - success scenario")
-//    @Test
-//    void testAddPiste() {
-//        // Mocking
-//        Piste pisteToAdd = new Piste("NewPiste", Color.GREEN, 120, 12);
-//        when(pisteRepository.save(any(Piste.class))).thenReturn(pisteToAdd);
-//
-//        // Actual
-//        Piste result = pisteServices.addPiste(pisteToAdd);
-//
-//        // Verification
-//        verify(pisteRepository, times(1)).save(any(Piste.class));
-//
-//        // Assert
-//        Assertions.assertNotNull(result);
-//        Assertions.assertEquals(pisteToAdd.getNamePiste(), result.getNamePiste());
-//    }
-//
-//    @DisplayName("Remove piste - success scenario")
-//    @Test
-//    void testRemovePiste() {
-//        // Mocking
-//        Long numPisteToRemove = 1L;
-//
-//        // Actual
-//        pisteServices.removePiste(numPisteToRemove);
-//
-//        // Verification
-//        verify(pisteRepository, times(1)).deleteById(eq(numPisteToRemove));
-//    }
-//
-//    @DisplayName("Retrieve piste by id - success scenario")
-//    @Test
-//    void testRetrievePiste() {
-//        // Mocking
-//        Long numPisteToRetrieve = 1L;
-//        Piste mockPiste = new Piste(numPisteToRetrieve, "Piste1", Color.RED, 100, 10, null);
-//        when(pisteRepository.findById(eq(numPisteToRetrieve))).thenReturn(Optional.of(mockPiste));
-//
-//        // Actual
-//        Piste result = pisteServices.retrievePiste(numPisteToRetrieve);
-//
-//        // Verification
-//        verify(pisteRepository, times(1)).findById(eq(numPisteToRetrieve));
-//
-//        // Assert
-//        Assertions.assertNotNull(result);
-//        Assertions.assertEquals(mockPiste.getNumPiste(), result.getNumPiste());
-//    }
+    @DisplayName("Add piste - success scenario")
+    @Test
+    void testAddPiste() {
+        // Mocking
+        Piste pisteToAdd = new Piste("NewPiste", Color.GREEN, 120, 12);
+        when(pisteRepository.save(any(Piste.class))).thenReturn(pisteToAdd);
+
+        // Actual
+        Piste result = pisteServices.addPiste(pisteToAdd);
+
+        // Verification
+        verify(pisteRepository, times(1)).save(any(Piste.class));
+
+        // Assert
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(pisteToAdd.getNamePiste(), result.getNamePiste());
+    }
+
+    @DisplayName("Remove piste - success scenario")
+    @Test
+    void testRemovePiste() {
+        // Mocking
+        Long numPisteToRemove = 1L;
+
+        // Actual
+        pisteServices.removePiste(numPisteToRemove);
+
+        // Verification
+        verify(pisteRepository, times(1)).deleteById(numPisteToRemove);
+    }
+
+    @DisplayName("Retrieve piste by id - success scenario")
+    @Test
+    void testRetrievePiste() {
+        // Mocking
+        Long numPisteToRetrieve = 1L;
+        Piste mockPiste = new Piste(numPisteToRetrieve, "Piste1", Color.RED, 100, 10, null);
+        when(pisteRepository.findById(numPisteToRetrieve)).thenReturn(Optional.of(mockPiste));
+
+        // Actual
+        Piste result = pisteServices.retrievePiste(numPisteToRetrieve);
+
+        // Verification
+        verify(pisteRepository, times(1)).findById(numPisteToRetrieve);
+
+        // Assert
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(mockPiste.getNumPiste(), result.getNumPiste());
+    }
 }
