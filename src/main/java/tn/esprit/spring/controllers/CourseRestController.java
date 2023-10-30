@@ -32,8 +32,8 @@ public class CourseRestController {
 
     @Operation(description = "Update Course ")
     @PutMapping("/update")
-    public Course updateCourse(@RequestBody Course course){
-        return  courseServices.updateCourse(course);
+    public CourseDTO updateCourse(@RequestBody CourseDTO course){
+        return  courseServices.addUpdateCourse(course);
     }
 
     @Operation(description = "Retrieve Course by Id")
