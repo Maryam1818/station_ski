@@ -29,5 +29,7 @@ public class Subscription implements Serializable {
 	Float price;
 //	@Enumerated(EnumType.STRING)
 	TypeSubscription typeSub;
+	//amira hajji
+
 
 }
