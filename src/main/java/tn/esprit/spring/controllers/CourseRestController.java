@@ -4,8 +4,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.spring.dto.CourseDTO;
 import tn.esprit.spring.entities.Course;
-import tn.esprit.spring.entities.TypeCourse;
 import tn.esprit.spring.services.ICourseServices;
 
 import java.util.List;
@@ -20,8 +20,8 @@ public class CourseRestController {
 
     @Operation(description = "Add Course")
     @PostMapping("/add")
-    public Course addCourse(@RequestBody Course course){
-        return  courseServices.addCourse(course);
+    public CourseDTO addCourse(@RequestBody CourseDTO courseDTO){
+        return  courseServices.addUpdateCourse(courseDTO);
     }
 
     @Operation(description = "Retrieve all Courses")

@@ -2,8 +2,8 @@ package tn.esprit.spring.services;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import tn.esprit.spring.dto.CourseDTO;
 import tn.esprit.spring.entities.Course;
-import tn.esprit.spring.entities.TypeCourse;
 import tn.esprit.spring.repositories.ICourseRepository;
 
 import java.util.List;
@@ -33,5 +33,12 @@ public class CourseServicesImpl implements  ICourseServices{
         return courseRepository.findById(numCourse).orElse(null);
     }
 
+    @Override
+    public CourseDTO addUpdateCourse(CourseDTO c) {
+
+        courseRepository.save(CourseDTO.toEntity(c));
+
+        return c;
+    }
 
 }
