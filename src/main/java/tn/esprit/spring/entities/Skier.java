@@ -21,7 +21,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level=AccessLevel.PRIVATE)
 @Entity
 public class Skier implements Serializable {
-//amine test
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	Long numSkier;
@@ -45,7 +45,7 @@ public class Skier implements Serializable {
 	@OneToMany(mappedBy = "skier")
 	Set<Registration> registrations;
 
-//Amine manag
+
 
 
 	public Skier(String lastName) {

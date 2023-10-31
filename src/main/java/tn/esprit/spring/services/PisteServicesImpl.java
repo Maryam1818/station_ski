@@ -9,7 +9,7 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class PisteServicesImpl implements  IPisteServices{
-//hello
+
     private IPisteRepository pisteRepository;
 
     @Override
