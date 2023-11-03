@@ -5,15 +5,11 @@ import java.time.LocalDate;
 
 import javax.persistence.*;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 @Getter
 @Setter
+@Builder
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,5 +25,7 @@ public class Subscription implements Serializable {
 	Float price;
 //	@Enumerated(EnumType.STRING)
 	TypeSubscription typeSub;
+	//amira hajji
+
 
 }
