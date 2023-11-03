@@ -71,6 +71,34 @@ class GestionStationSkiApplicationTests {
 
 
 	@Test
+	void testaddCourse() {
+		CourseDTO newCourseDto = new CourseDTO();
+		newCourseDto.setNumCourse(15L);
+		newCourseDto.setTypeCourse(TypeCourse.INDIVIDUAL);
+		newCourseDto.setLevel(50);
+		newCourseDto.setSupport(Support.SKI);
+		newCourseDto.setPrice(250F);
+		newCourseDto.setTimeSlot(160);
+
+		when(courseRepository.save(any(Course.class))).thenAnswer(invocation -> {
+			Course savedCourse= invocation.getArgument(0);
+			savedCourse.setNumCourse(1L); // Set the ID as it would be generated during save
+			return savedCourse;
+		});
+
+		CourseDTO addedCourseDto = courseService.addUpdateCourse(newCourseDto);
+
+		verify(courseRepository).save(any(Course.class));
+
+		assertEquals(TypeCourse.INDIVIDUAL, addedCourseDto.getTypeCourse());
+		assertEquals(50, addedCourseDto.getLevel());
+		assertEquals(Support.SKI, addedCourseDto.getSupport());
+		assertEquals(250F, addedCourseDto.getPrice());
+		assertEquals(160, addedCourseDto.getTimeSlot());
+	}
+
+
+	@Test
 	void testUpdateCourse() {
 		CourseDTO updatedCourseDto = new CourseDTO();
 		updatedCourseDto.setNumCourse(15L);
