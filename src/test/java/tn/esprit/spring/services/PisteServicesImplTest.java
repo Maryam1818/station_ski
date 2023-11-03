@@ -1,149 +1,94 @@
 package tn.esprit.spring.services;
 
-import org.junit.jupiter.api.*;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
 import tn.esprit.spring.entities.Color;
 import tn.esprit.spring.entities.Piste;
 import tn.esprit.spring.repositories.IPisteRepository;
-import java.util.ArrayList;
+
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
-import static org.mockito.ArgumentMatchers.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith(MockitoExtension.class)
-class PisteServicesImplTest {
-
-    @Mock
-    IPisteRepository pisteRepository;
+@Slf4j
+class PisteServiceMockTest {
 
     @InjectMocks
-    PisteServicesImpl pisteServices;
+    private PisteServicesImpl pisteServices;
 
-    @DisplayName("Retrieve all pistes - success scenario")
+    @Mock
+    private IPisteRepository pisteRepository;
+
     @Test
-    void testRetrieveAllPistes() {
-        // Mocking
-        List<Piste> mockPistes = new ArrayList<>();
-        mockPistes.add(new Piste(1L, "Piste1", Color.RED, 100, 10, null));
-        mockPistes.add(new Piste(2L, "Piste2", Color.BLUE, 150, 15, null));
-        when(pisteRepository.findAll()).thenReturn(mockPistes);
+    public void testAddPiste() {
+        Piste piste = new Piste("Blue Slope", Color.BLUE, 500, 15);
 
-        // Actual
-         List<Piste> result = pisteServices.retrieveAllPistes();
+        // Mock the repository's save method
+        when(pisteRepository.save(piste)).thenReturn(piste);
 
-        // Verification
-          verify(pisteRepository, times(1)).findAll();
+        Piste result = pisteServices.addPiste(piste);
 
-        // Assert
-          Assertions.assertEquals(2, result.size());
+        // Verify that the save method was called once
+        verify(pisteRepository, times(1)).save(piste);
+
+        // Verify that the result is not null
+        assertNotNull(result);
+
+        // Verify that the result is the same as the input piste
+        assertEquals(piste, result);
     }
 
-    @DisplayName("Add piste - success scenario")
     @Test
-    void testAddPiste() {
-        // Mocking
-        Piste pisteToAdd = new Piste("NewPiste", Color.GREEN, 120, 12);
-        when(pisteRepository.save(any(Piste.class))).thenReturn(pisteToAdd);
+    public void testRetrieveAllPistes() {
+        // Create a set of Piste objects using the parameterized constructor
+        Set<Piste> pistes = new HashSet<>();
+        pistes.add(new Piste("Red Slope", Color.RED, 700, 20));
+        pistes.add(new Piste("Green Slope", Color.GREEN, 400, 10));
 
-        // Actual
-        Piste result = pisteServices.addPiste(pisteToAdd);
+        // Mock the behavior of the pisteRepository to return the set of pistes
+        when(pisteRepository.findAll()).thenReturn((List<Piste>) pistes);
 
-        // Verification
-        verify(pisteRepository, times(1)).save(any(Piste.class));
+        List<Piste> result = pisteServices.retrieveAllPistes();
 
-        // Assert
-        Assertions.assertNotNull(result);
-        Assertions.assertEquals(pisteToAdd.getNamePiste(), result.getNamePiste());
+        // Verify that the service method returns the expected result
+        assertEquals(pistes, result);
     }
 
-    @DisplayName("Remove piste - success scenario")
     @Test
-    void testRemovePiste() {
-        // Mocking
+    public void testRetrievePiste() {
+        // Create a sample Piste object for testing
+        Long numPiste = 1L;
+        Piste samplePiste = new Piste("Black Slope", Color.BLACK, 800, 25);
+
+        // Mock the behavior of the pisteRepository to return the samplePiste when findById is called with numPiste
+        when(pisteRepository.findById(numPiste)).thenReturn(Optional.of(samplePiste));
+
+        // Call the retrievePiste function
+        Piste retrievedPiste = pisteServices.retrievePiste(numPiste);
+
+        // Verify that the retrieved piste is the same as the samplePiste
+        assertEquals(samplePiste, retrievedPiste);
+    }
+
+    @Test
+    public void testRemovePiste() {
+        // Create a sample piste ID for testing
         Long numPisteToRemove = 1L;
 
-        // Actual
+        // Call the removePiste function with the numPiste
         pisteServices.removePiste(numPisteToRemove);
 
-        // Verification
+        // Verify that the deleteById method of pisteRepository is called with the numPisteToRemove
         verify(pisteRepository, times(1)).deleteById(numPisteToRemove);
     }
-
-    @DisplayName("Retrieve piste by id - success scenario")
-    @Test
-    void testRetrievePiste() {
-        // Mocking
-        Long numPisteToRetrieve = 1L;
-        Piste mockPiste = new Piste(numPisteToRetrieve, "Piste1", Color.RED, 100, 10, null);
-        when(pisteRepository.findById(numPisteToRetrieve)).thenReturn(Optional.of(mockPiste));
-
-        // Actual
-        Piste result = pisteServices.retrievePiste(numPisteToRetrieve);
-
-        // Verification
-        verify(pisteRepository, times(1)).findById(numPisteToRetrieve);
-
-        // Assert
-        Assertions.assertNotNull(result);
-        Assertions.assertEquals(mockPiste.getNumPiste(), result.getNumPiste());
-    }
 }
-
-//    @DisplayName("Add piste - success scenario")
-//    @Test
-//    void testAddPiste() {
-//        // Mocking
-//        Piste pisteToAdd = new Piste("NewPiste", Color.GREEN, 120, 12);
-//        when(pisteRepository.save(any(Piste.class))).thenReturn(pisteToAdd);
-//
-//        // Actual
-//        Piste result = pisteServices.addPiste(pisteToAdd);
-//
-//        // Verification
-//        verify(pisteRepository, times(1)).save(any(Piste.class));
-//
-//        // Assert
-//        Assertions.assertNotNull(result);
-//        Assertions.assertEquals(pisteToAdd.getNamePiste(), result.getNamePiste());
-//    }
-//
-//    @DisplayName("Remove piste - success scenario")
-//    @Test
-//    void testRemovePiste() {
-//        // Mocking
-//        Long numPisteToRemove = 1L;
-//
-//        // Actual
-//        pisteServices.removePiste(numPisteToRemove);
-//
-//        // Verification
-//        verify(pisteRepository, times(1)).deleteById(eq(numPisteToRemove));
-//    }
-//
-//    @DisplayName("Retrieve piste by id - success scenario")
-//    @Test
-//    void testRetrievePiste() {
-//        // Mocking
-//        Long numPisteToRetrieve = 1L;
-//        Piste mockPiste = new Piste(numPisteToRetrieve, "Piste1", Color.RED, 100, 10, null);
-//        when(pisteRepository.findById(eq(numPisteToRetrieve))).thenReturn(Optional.of(mockPiste));
-//
-//        // Actual
-//        Piste result = pisteServices.retrievePiste(numPisteToRetrieve);
-//
-//        // Verification
-//        verify(pisteRepository, times(1)).findById(eq(numPisteToRetrieve));
-//
-//        // Assert
-//        Assertions.assertNotNull(result);
-//        Assertions.assertEquals(mockPiste.getNumPiste(), result.getNumPiste());
-//    }
-//}
