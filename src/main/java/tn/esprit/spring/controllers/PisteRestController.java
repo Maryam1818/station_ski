@@ -15,7 +15,30 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PisteRestController {
 
+    private final IPisteServices pisteServices;
 
+    @Operation(description = "Add Piste")
+    @PostMapping("/add")
+    public Piste addPiste(@RequestBody Piste piste){
+        return  pisteServices.addPiste(piste);
+    }
+    @Operation(description = "Retrieve all Pistes")
+    @GetMapping("/all")
+    public List<Piste> getAllPistes(){
+        return pisteServices.retrieveAllPistes();
+    }
+
+    @Operation(description = "Retrieve Piste by Id")
+    @GetMapping("/get/{id-piste}")
+    public Piste getById(@PathVariable("id-piste") Long numPiste){
+        return pisteServices.retrievePiste(numPiste);
+    }
+
+    @Operation(description = "Delete Piste by Id")
+    @DeleteMapping("/delete/{id-piste}")
+    public void deleteById(@PathVariable("id-piste") Long numPiste){
+        pisteServices.removePiste(numPiste);
+    }
     
 
 }

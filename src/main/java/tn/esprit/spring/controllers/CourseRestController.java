@@ -16,6 +16,30 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CourseRestController {
     
+    private final ICourseServices courseServices;
 
+    @Operation(description = "Add Course")
+    @PostMapping("/add")
+    public Course addCourse(@RequestBody Course course){
+        return  courseServices.addCourse(course);
+    }
+
+    @Operation(description = "Retrieve all Courses")
+    @GetMapping("/all")
+    public List<Course> getAllCourses(){
+        return courseServices.retrieveAllCourses();
+    }
+
+    @Operation(description = "Update Course ")
+    @PutMapping("/update")
+    public Course updateCourse(@RequestBody Course course){
+        return  courseServices.updateCourse(course);
+    }
+
+    @Operation(description = "Retrieve Course by Id")
+    @GetMapping("/get/{id-course}")
+    public Course getById(@PathVariable("id-course") Long numCourse){
+        return courseServices.retrieveCourse(numCourse);
+    }
 
 }

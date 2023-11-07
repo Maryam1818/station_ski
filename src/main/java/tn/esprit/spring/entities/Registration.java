@@ -16,24 +16,32 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
+
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@FieldDefaults(level=AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class Registration implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long numRegistration;
 	int numWeek;
 
 	@JsonIgnore
 	@ManyToOne
-    Skier skier;
+	Skier skier;
 	@JsonIgnore
 	@ManyToOne
 	Course course;
+
+	// Additional custom constructor
+	public Registration(Skier skier, Course course, int numWeek) {
+		this.skier = skier;
+		this.course = course;
+		this.numWeek = numWeek;
+	}
 }
