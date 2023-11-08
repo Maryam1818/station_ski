@@ -36,13 +36,17 @@ class RegistrationServiceTest {
 
     @Test
     public void testAddRegistration() {
-        Skier skier = new Skier(); // Initialize with appropriate skier data
-        Course course = new Course(); // Initialize with appropriate course data
+        // Initialize Skier and Course with appropriate test data
+        Skier skier = new Skier();
+        skier.setNumSkier(1L); // Set the Skier's ID
+        Course course = new Course();
+        course.setNumCourse(2L); // Set the Course's ID
+
         Registration registration = new Registration(skier, course, 1);
 
         // Mock the behavior of skierRepository and courseRepository
-        when(skierRepository.findById(anyLong())).thenReturn(Optional.of(skier));
-        when(courseRepository.findById(anyLong())).thenReturn(Optional.of(course));
+        when(skierRepository.findById(1L)).thenReturn(Optional.of(skier));
+        when(courseRepository.findById(2L)).thenReturn(Optional.of(course));
 
         // Mock the repository's save method
         when(registrationRepository.save(registration)).thenReturn(registration);
@@ -55,9 +59,9 @@ class RegistrationServiceTest {
         // Verify that the result is not null
         assertNotNull(result);
 
-        // Verify that the result is the same as the input registration
-        assertEquals(registration, result);
+        // Verify specific properties of the registration
+        assertEquals(skier, result.getSkier());
+        assertEquals(course, result.getCourse());
+        assertEquals(1, result.getNumWeek()); // Verify other properties as needed
     }
-
-    // Add test methods for other service methods as needed
 }
