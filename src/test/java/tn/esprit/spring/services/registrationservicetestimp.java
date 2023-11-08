@@ -1,20 +1,18 @@
 package tn.esprit.spring.services;
 
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import tn.esprit.spring.entities.Course;
 import tn.esprit.spring.entities.Registration;
 import tn.esprit.spring.entities.Skier;
-import tn.esprit.spring.repositories.ICourseRepository;
+import tn.esprit.spring.entities.Course;
 import tn.esprit.spring.repositories.IRegistrationRepository;
 import tn.esprit.spring.repositories.ISkierRepository;
+import tn.esprit.spring.repositories.ICourseRepository;
 import tn.esprit.spring.services.RegistrationServicesImpl;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,8 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-@Slf4j
-class registrationservicetestimp {
+class RegistrationServiceTest {
 
     @InjectMocks
     private RegistrationServicesImpl registrationServices;
