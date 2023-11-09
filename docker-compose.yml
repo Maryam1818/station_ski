@@ -16,7 +16,7 @@ services:
   mysqldb:
     image: mysql:8
     volumes:
-      -  /home/mysql/data:/var/lib/mysql:rw
+      -  /home/mysql/maryamdata:/var/lib/mysql:rw
     networks:
       - sk
     environment:
