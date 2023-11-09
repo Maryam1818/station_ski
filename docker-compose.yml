@@ -5,7 +5,7 @@ services:
     ports:
       - "8089:8089"
     networks:
-      - skii
+      - sk
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb/stationSki
       SPRING_DATASOURCE_USERNAME: root
@@ -18,10 +18,10 @@ services:
     volumes:
       -  /home/mysql/data:/var/lib/mysql:rw
     networks:
-      - skii
+      - sk
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=stationSki
 
 networks:
-  skii:
+  sk:
