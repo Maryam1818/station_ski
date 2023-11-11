@@ -8,6 +8,14 @@ import java.util.List;
 
 public interface IInstructorServices {
 
+    Instructor addInstructor(Instructor instructor);
 
+    Instructor updateInstructor(Instructor instructor);
+
+    Instructor retrieveInstructorById(Long id);
+
+    List<Instructor> retrieveAllInstructor();
+
+    void deleteInstructor(Instructor instructor);
 
 }
