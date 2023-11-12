@@ -27,6 +27,15 @@ services:
       - mysql
     networks:
       - app-network
+  frontend:
+    image: hjamira/stationskifront:latest
+    container_name: frontend
+    ports:
+      - "80:80" 
+    networks:
+      - app-network
+    depends_on:
+      - backend-container
 
 volumes:
   mysql_data:
