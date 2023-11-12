@@ -2,7 +2,6 @@ package tn.esprit.spring.services;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tn.esprit.spring.entities.Skier;
 import tn.esprit.spring.entities.Subscription;
@@ -76,5 +75,9 @@ public class SubscriptionServicesImpl implements ISubscriptionServices{
                 + subscriptionRepository.recurringRevenueByTypeSubEquals(TypeSubscription.SEMESTRIEL)/6
                 + subscriptionRepository.recurringRevenueByTypeSubEquals(TypeSubscription.ANNUAL)/12;
         log.info("Monthly Revenue = " + revenue);
+    }
+    @Override
+    public List<Subscription> getAllSubscriptions() {
+        return (List<Subscription>) subscriptionRepository.findAll();
     }
 }
