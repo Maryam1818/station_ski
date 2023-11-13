@@ -1,5 +1,4 @@
-FROM openjdk:11-jdk
-ARG JAR_URL
+FROM openjdk:11
 EXPOSE 8089
-ADD $JAR_URL amine-gestion-station-ski.jar
-ENTRYPOINT ["java","-jar","/amine-gestion-station-ski.jar"]
+ADD ./target/amine-gestion-station-ski.jar amine-gestion-station-ski.jar
+ENTRYPOINT ["java","-jar","/gestion-station-ski-1.0.jar"]
