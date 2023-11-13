@@ -17,6 +17,7 @@ import tn.esprit.spring.services.ICourseServices;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -123,5 +124,16 @@ class GestionStationSkiApplicationTests {
 	}
 
 
+	@Test
+	void testretrieveCourse() {
+
+		Course course1 = new Course();
+		course1.setNumCourse(1L);
+		when(courseRepository.findById(1L)).thenReturn(Optional.of(course1));
+		Course retrievedCourse = courseService.retrieveCourse(1L);
+		verify(courseRepository).findById(1L);
+		assertEquals(course1, retrievedCourse);
+
+	}
 
 }
