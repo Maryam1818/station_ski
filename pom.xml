@@ -77,7 +77,7 @@
 		</repository>
 	</distributionManagement>
 	<build>
-		<finalName>amine-gestion-station-ski</finalName>
+
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
