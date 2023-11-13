@@ -15,7 +15,6 @@ services:
       - app-network
 
   backend-container:
-    build:
     image: bedouizied/stationdeski:1.0.0
     ports:
       - "8089:8089"
