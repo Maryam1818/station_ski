@@ -13,7 +13,7 @@ services:
   gestion-station-ski:
     depends_on:
       - mysqldb
-    image: amine0000/amine-gestion-station-ski10
+    image: amine0000/amine-gestion-station-ski
     restart: on-failure
     environment:
       MYSQL_ROOT_PASSWORD: ""  # Set to an empty string
