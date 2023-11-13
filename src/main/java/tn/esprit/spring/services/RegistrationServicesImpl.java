@@ -8,7 +8,6 @@ import tn.esprit.spring.repositories.ICourseRepository;
 import tn.esprit.spring.repositories.IRegistrationRepository;
 import tn.esprit.spring.repositories.ISkierRepository;
 
-import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
@@ -37,7 +36,6 @@ public class RegistrationServicesImpl implements  IRegistrationServices{
         return registrationRepository.save(registration);
     }
 
-    @Transactional
     @Override
     public Registration addRegistrationAndAssignToSkierAndCourse(Registration registration, Long numSkieur, Long numCours) {
         Skier skier = skierRepository.findById(numSkieur).orElse(null);
@@ -101,6 +99,10 @@ public class RegistrationServicesImpl implements  IRegistrationServices{
     @Override
     public List<Integer> numWeeksCourseOfInstructorBySupport(Long numInstructor, Support support) {
         return registrationRepository.numWeeksCourseOfInstructorBySupport(numInstructor, support);
+    }
+    @Override
+    public List<Registration> getAllRegistration() {
+        return (List<Registration>) registrationRepository.findAll();
     }
 
 }

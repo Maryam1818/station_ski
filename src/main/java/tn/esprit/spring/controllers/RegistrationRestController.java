@@ -16,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/registration")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class RegistrationRestController {
     private final IRegistrationServices registrationServices;
 
@@ -48,5 +49,9 @@ public class RegistrationRestController {
     public List<Integer> numWeeksCourseOfInstructorBySupport(@PathVariable("numInstructor")Long numInstructor,
                                                                   @PathVariable("support") Support support) {
         return registrationServices.numWeeksCourseOfInstructorBySupport(numInstructor,support);
+    }
+    @GetMapping("/allRegistration")
+    public List<Registration> getAllRegistration(){
+        return registrationServices.getAllRegistration();
     }
 }
