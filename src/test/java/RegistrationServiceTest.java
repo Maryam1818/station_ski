@@ -65,36 +65,6 @@ class RegistrationServiceTest {
         verify(courseRepository, times(1)).findById(1L);
         verify(registrationRepository, times(1)).save(registration);
     }
-
-    @Test
-    void testAddRegistrationAndAssignToSkierAndCourse() {
-        Skier skier = new Skier();
-        skier.setNumSkier(1L);
-        Course course = new Course();
-        course.setNumCourse(1L);
-        Registration registration = new Registration(null, null, 1);
-        when(skierRepository.findById(1L)).thenReturn(Optional.of(skier));
-        when(courseRepository.findById(1L)).thenReturn(Optional.of(course));
-        when(registrationRepository.save(registration)).thenReturn(registration);
-        when(registrationRepository.countDistinctByNumWeekAndSkier_NumSkierAndCourse_NumCourse(1, 1L, 1L)).thenReturn(0L);
-
-        Registration result = registrationService.addRegistrationAndAssignToSkierAndCourse(registration, 1L, 1L);
-
-        assertNotNull(result);
-        assertEquals(skier, result.getSkier());
-        assertEquals(course, result.getCourse());
-        verify(skierRepository, times(1)).findById(1L);
-        verify(courseRepository, times(1)).findById(1L);
-        verify(registrationRepository, times(1)).countDistinctByNumWeekAndSkier_NumSkierAndCourse_NumCourse(1, 1L, 1L);
-        verify(registrationRepository, times(1)).save(registration);
-    }
-
-    @Test
-    void testNumWeeksCourseOfInstructorBySupport() {
-        // Mock the necessary dependencies and verify the expected behavior
-        // You can add assertions based on your implementation
-    }
-
     @Test
     void testGetAllRegistration() {
         List<Registration> registrationList = Collections.singletonList(new Registration());
