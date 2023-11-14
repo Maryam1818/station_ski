@@ -41,8 +41,8 @@ public class SkierServiceMockTest {
     @Test
     public void testAddSkier() {
         Skier skier = new Skier();
-        skier.setFirstName("wael");
-        skier.setLastName("hcine");
+        skier.setFirstName("amine");
+        skier.setLastName("ouhichi");
         skier.setDateOfBirth(LocalDate.of(1990, 1, 1));
         skier.setCity("Tunis");
 
